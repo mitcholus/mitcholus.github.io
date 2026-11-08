@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Lernlabor – interaktive Lernapps</title>
+  <style>
+    :root{--ink:#102a2b;--cream:#f5f0e7;--lime:#d9ff63;--orange:#ff8055;--blue:#83bee7;--purple:#d8b8ec}*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Arial,sans-serif}.top{padding:22px 6vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #173b3726}.brand{font-weight:900;font-size:20px}.brand b{display:inline-grid;place-items:center;width:34px;height:34px;background:var(--ink);color:var(--lime);border-radius:50%;margin-right:9px;font-family:Georgia;font-style:italic}.top span{font-size:12px;font-weight:700}.hero{padding:80px 6vw 65px;background:var(--ink);color:#fff;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:330px;height:330px;border:70px solid var(--lime);border-radius:50%;right:-80px;top:-140px;opacity:.9}.eyebrow{color:var(--lime);font-weight:900;letter-spacing:2px;font-size:11px}.hero h1{font:500 clamp(55px,9vw,105px)/.88 Georgia;margin:18px 0 26px;letter-spacing:-4px;position:relative;z-index:1}.hero p:last-child{font:18px/1.6 Georgia;max-width:590px;color:#d8e5e2}.content{max-width:1200px;margin:auto;padding:60px 26px 90px}.step{font-size:11px;letter-spacing:2px;font-weight:900;color:#dc6544}.content h2{font:500 43px Georgia;margin:10px 0 25px}.classes{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:52px}.classes button{border:2px solid var(--ink);background:transparent;border-radius:99px;padding:12px 20px;font-weight:800;cursor:pointer}.classes button.active{background:var(--ink);color:white}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}.card{min-height:270px;padding:24px;border-radius:8px;text-decoration:none;color:var(--ink);background:var(--lime);position:relative;transition:.2s}.card:nth-child(2n){background:var(--orange)}.card:nth-child(3n){background:var(--blue)}.card:hover{transform:translateY(-5px);box-shadow:0 12px 30px #0c2b2640}.card small{font-size:10px;font-weight:900;letter-spacing:1.2px}.card h3{font:500 34px Georgia;margin-top:85px}.card span{position:absolute;left:24px;right:24px;bottom:22px;display:flex;justify-content:space-between;font-size:12px;font-weight:800}.hidden{display:none}.empty{padding:35px;border:2px dashed #173b3740;color:#516763}.info{margin-top:65px;background:#fff;padding:26px;border-left:6px solid var(--lime);font-size:13px;line-height:1.6}footer{background:var(--ink);color:#c4d4d1;text-align:center;padding:30px;font-size:12px}@media(max-width:600px){.top span{display:none}.hero{padding-top:60px}.hero h1{letter-spacing:-2px}.hero:after{opacity:.25}.content{padding-top:45px}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="brand"><b>L</b> Lernlabor</div><span>Gymnasium · selbstständig lernen</span></header>
+  <section class="hero"><p class="eyebrow">DEIN DIGITALES LERNREGAL</p><h1>Wähle. Lerne.<br>Verstehe.</h1><p>Interaktive Lernapps für verschiedene Klassenstufen – verständlich, motivierend und passend zum Unterricht.</p></section>
+  <main class="content">
+    <p class="step">SCHRITT 1</p><h2>Wähle deine Klassenstufe.</h2>
+    <nav class="classes" aria-label="Klassenstufen">
+      <button data-class="all">Alle</button><button data-class="7">Klasse 7</button><button data-class="8">Klasse 8</button><button data-class="9">Klasse 9</button><button class="active" data-class="10">Klasse 10</button>
+    </nav>
+    <p class="step">SCHRITT 2</p><h2>Wähle ein Thema.</h2>
+    <section class="grid" id="apps">
+      <a class="card" data-class="10" href="klasse-10/genetik/"><small>BIOLOGIE · KLASSE 10</small><h3>Genetik</h3><span><i>6 Kapitel</i><b>Lernapp öffnen →</b></span></a>
+    </section>
+    <p class="empty hidden" id="empty">Für diese Klassenstufe sind noch keine Lernapps veröffentlicht.</p>
+    <div class="info"><b>Gut zu wissen:</b> Eine Anmeldung ist nicht nötig. Dein Lernfortschritt wird nur auf diesem Gerät im Browser gespeichert und nicht an die Schule oder GitHub übertragen.</div>
+  </main>
+  <footer>Das Lernlabor wird Schritt für Schritt um neue Themen erweitert.</footer>
+  <script>
+    const buttons=[...document.querySelectorAll('[data-class].classes button, .classes button')];
+    const cards=[...document.querySelectorAll('.card')];
+    document.querySelectorAll('.classes button').forEach(button=>button.addEventListener('click',()=>{
+      document.querySelectorAll('.classes button').forEach(b=>b.classList.remove('active')); button.classList.add('active');
+      const selected=button.dataset.class; let visible=0;
+      cards.forEach(card=>{const show=selected==='all'||card.dataset.class===selected;card.classList.toggle('hidden',!show);if(show)visible++});
+      document.getElementById('empty').classList.toggle('hidden',visible!==0);
+    }));
+  </script>
+</body>
+</html>
